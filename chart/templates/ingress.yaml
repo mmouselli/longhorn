@@ -18,10 +18,12 @@ spec:
   - host: {{ .Values.ingress.host }}
     http:
       paths:
-        - path: {{ default "" .Values.ingress.path }}
-          backend:
-            serviceName: longhorn-frontend
-            servicePort: 80
+      - backend:
+          service:
+            name: longhorn-frontend
+            port:
+              number: 80
+        pathType: ImplementationSpecific
 {{- if .Values.ingress.tls }}
   tls:
   - hosts:
